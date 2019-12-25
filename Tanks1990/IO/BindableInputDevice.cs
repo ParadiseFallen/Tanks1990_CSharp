@@ -102,7 +102,7 @@ namespace Tanks1990.IO.BindableIODevice.Controller
             if (HistorySize != 0) UpdateHistory(e);
             Keys.ForEach(i=>i.Update(sender,e, History));
         }
-
+        /*/**/*/
         /// <summary>
         /// Try to load confuguration
         /// </summary>
