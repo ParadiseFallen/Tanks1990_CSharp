@@ -128,7 +128,7 @@ namespace Tanks1990.IO.BindableIODevice.Controller
         {
            KeyInterpretator.KeyInterpretator.GetInstance().SaveToFileSamples(path);
         }
-
+        /////
         /////////////TODO////////////////////////////////////////////////////////////////////
         ////Fix serialization Сделать словарь по функциям типа string/action
 #if !NON_WORK
