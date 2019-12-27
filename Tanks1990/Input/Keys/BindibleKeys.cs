@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tanks1990.IO.BindableIODevice.Key
+namespace Tanks1990.Input.BindableIODevice.Key
 {
     /// <summary>
     /// Bindible key
@@ -30,7 +30,7 @@ namespace Tanks1990.IO.BindableIODevice.Key
         /// <param name="ActivationFunction">Function of activation</param>
         /// <param name="Fucntion">Action</param>
         /// <param name="Description">Description/param>
-        public BindibleKey(Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool> ActivationFunction = null, Action Fucntion = null,string Description = "NULL")
+        public BindibleKey(string Description,Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool> ActivationFunction = null, Action Fucntion = null)
         {
             this.Triger = ActivationFunction;
             this.Trigered += Fucntion;

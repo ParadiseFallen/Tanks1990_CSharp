@@ -12,9 +12,9 @@ using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
-using Tanks1990.IO.BindableIODevice.Controller;
-using Tanks1990.IO.BindableIODevice.Key;
-using Tanks1990.IO.KeyInterpretator;
+using Tanks1990.Input.BindableIODevice.Controller;
+using Tanks1990.Input.BindableIODevice.Key;
+using Tanks1990.Input.KeyInterpretator;
 
 
 namespace Tanks1990
@@ -25,11 +25,10 @@ namespace Tanks1990
         {
             //keyboard
             BindableInputDevice keyboard = new BindableInputDevice();
+            keyboard.KeyAdded += KeyInterpretator.GetInstance().RegisterSample;
 
             RenderWindow window = new RenderWindow(VideoMode.DesktopMode, "test");
-
-            KeyInterpretator.GetInstance().KeyActionsDictionary.Add("RenderWindow.Close()", window.Close);
-            KeyInterpretator.GetInstance().KeyActivationFunctionsDictionary.Add("Pressed_Escape",((sender,history,e)=> {return e.Code == Keyboard.Key.Escape; }));
+            KeyInterpretator.GetInstance().RegisterAction("RenderWindow.Close()", window.Close);
 
             window.Closed += (sender, e) => { (sender as RenderWindow)?.Close(); };
 
@@ -40,12 +39,16 @@ namespace Tanks1990
             int a = 0;
 
 
-            keyboard.Keys.Add(new BindibleKey(((sender, history, key) => { return key.Code == Keyboard.Key.F5; }), (() => { Console.WriteLine($"FuckYou"); }), "F5"));
 
+            keyboard.AddKey(new BindibleKey("F5", (sender, history, key) => { return key.Code == Keyboard.Key.F5; }, () => { Console.WriteLine($"FuckYou"); }));
 
 
             //load conf
-            keyboard.LoadConfiguration();
+            //keyboard.LoadConfiguration();
+
+            //load only afetr all registration
+            KeyInterpretator.GetInstance().LoadFromFileSamples("Test");
+            KeyInterpretator.GetInstance().LoadLayout(keyboard);
             do
             {
                 window.DispatchEvents();
@@ -59,8 +62,8 @@ namespace Tanks1990
 
             } while (window.IsOpen);
 
-            keyboard.SaveConfiguration("D:/Layout.lyt");
-
+            //keyboard.SaveConfiguration("D:/Layout.lyt");
+            KeyInterpretator.GetInstance().SaveToFileSamples("Test");
 
 #if STOP_AT_END
             Console.WriteLine("Program done");

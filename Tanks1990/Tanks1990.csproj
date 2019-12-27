@@ -53,15 +53,19 @@
   <ItemGroup>
     <Reference Include="SFML.Audio, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFML.Audio.2.5.0\lib\netstandard2.0\SFML.Audio.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SFML.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFML.Graphics.2.5.0\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SFML.System, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFML.System.2.5.0\lib\netstandard2.0\SFML.System.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SFML.Window, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFML.Window.2.5.0\lib\netstandard2.0\SFML.Window.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,14 +77,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\GameEntities\GameEntity.cs" />
-    <Compile Include="Game\Map\Map.cs" />
-    <Compile Include="IO\KeyInterpretator.cs" />
-    <Compile Include="IO\Keys\LightKeyDataContainer.cs" />
+    <Compile Include="Application\Game\GameEntities\GameEntity.cs" />
+    <Compile Include="Application\Game\Map\Map.cs" />
+    <Compile Include="Input\KeyInterpretator.cs" />
+    <Compile Include="Input\Keys\LightKeyDataContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IO\BindableInputDevice.cs" />
-    <Compile Include="IO\Keys\BindibleKeys.cs" />
+    <Compile Include="Input\BindableInputDevice.cs" />
+    <Compile Include="Input\Keys\BindibleKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -99,8 +103,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game\Resources\" />
-    <Folder Include="Game\Rules\" />
+    <Folder Include="Application\Game\Resources\" />
+    <Folder Include="Application\Game\Rules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
