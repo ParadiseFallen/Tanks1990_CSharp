@@ -69,6 +69,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,16 +78,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Game\GameEntities\GameEntity.cs" />
-    <Compile Include="Application\Game\Map\Map.cs" />
-    <Compile Include="Input\KeyInterpretator.cs" />
-    <Compile Include="Input\Keys\LightKeyDataContainer.cs" />
+    <Compile Include="Application\App.cs" />
+    <Compile Include="Application\Data\Graphic\GraphicManager.cs" />
+    <Compile Include="Application\Data\Providers\SampleKeyFileProvider.cs" />
+    <Compile Include="Application\Game\Game.cs" />
+    <Compile Include="Application\Game\Logic\GameEntities\GameEntity.cs" />
+    <Compile Include="Application\Game\Logic\Map\Chunk.cs" />
+    <Compile Include="Application\Game\Logic\Map\Tile.cs" />
+    <Compile Include="Application\Game\Logic\Map\World.cs" />
+    <Compile Include="Application\Data\Providers\FileGraphicProvider.cs" />
+    <Compile Include="Application\Templates\Wraps\DescriptionWrap.cs" />
+    <Compile Include="Application\Interfaces\IProvider.cs" />
+    <Compile Include="Application\Input\KeyInterpretator.cs" />
+    <Compile Include="Application\Input\Keys\LightKeyDataContainer.cs" />
+    <Compile Include="Application\Tests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Input\BindableInputDevice.cs" />
-    <Compile Include="Input\Keys\BindibleKeys.cs" />
+    <Compile Include="Application\Input\BindableInputDevice.cs" />
+    <Compile Include="Application\Input\Keys\BindibleKeys.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -102,9 +114,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Application\Game\Resources\" />
-    <Folder Include="Application\Game\Rules\" />
+    <Content Include="Application\Resources\LowPolyBackground.png" />
+    <Content Include="Application\Resources\LowPolyBackground2.png" />
+    <Content Include="Application\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

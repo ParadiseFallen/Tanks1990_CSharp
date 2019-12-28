@@ -14,26 +14,7 @@ namespace Tanks1990.Input.BindableIODevice.Controller
     /// </summary>
     class BindableInputDevice
     {
-
-        //*////////////////TODO Make Keys Private
-
-        /*DATA*/
-        ///// <summary>
-        ///// List of bindible keys
-        ///// </summary>
-        //public List<BindibleKey> Keys { get; private set; }
-        ///// <summary>
-        ///// length of history
-        ///// </summary>
-        //public int HistorySize { get; set; }
-        ///// <summary>
-        ///// history of pressed keys
-        ///// </summary>
-        //private Queue<KeyEventArgs> History = new Queue<KeyEventArgs>();
-
-
         #region Data
-        /*DATA*/
         /// <summary>
         /// List of bindible keys
         /// </summary>
@@ -46,9 +27,8 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         /// history of pressed keys
         /// </summary>
         private Queue<KeyEventArgs> History = new Queue<KeyEventArgs>();
-        ///////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get list of Keys
+        /// UNSAFE! get list of Keys
         /// </summary>
         /// <returns>List<BindibleKey></returns>
         public List<BindibleKey> UnsafeGetKeys() { return Keys; }
@@ -61,9 +41,7 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         /// </summary>
         public event Action<LightKeyDataContainer> KeyAdded;
         #endregion
-
         #region Work with keys
-
         /// <summary>
         /// Add new key to list, if you send metadata KeyAdded will be invoked
         /// </summary>
@@ -76,7 +54,6 @@ namespace Tanks1990.Input.BindableIODevice.Controller
             if (metadata != null)
                 KeyAdded.Invoke(metadata);
         }
-
         /// <summary>
         /// Bind action to key by key description,
         /// key must be already created
@@ -101,7 +78,6 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         {
             GetKey(KeyDescription).Triger = Triger;
         }
-
         /// <summary>
         /// Create key with description
         /// </summary>
@@ -113,7 +89,6 @@ namespace Tanks1990.Input.BindableIODevice.Controller
                 Keys.Add(new BindibleKey(KeyDescription, null, null));
             }
         }
-
         /// <summary>
         /// find key by description
         /// </summary>
@@ -167,35 +142,5 @@ namespace Tanks1990.Input.BindableIODevice.Controller
             if (HistorySize != 0) UpdateHistory(e);
             Keys.ForEach(i=>i.Update(sender,e, History));
         }
-
-
-        
-        ///// <summary>
-        ///// Try to load confuguration
-        ///// </summary>
-        ///// <param name="path">if clear load default</param>
-        //public void LoadConfiguration(string path = "DEFAULT")
-        //{
-        //    var instance = KeyInterpretator.KeyInterpretator.GetInstance();
-        //    if (path=="DEFAULT")
-        //    {
-        //        instance.LoadDeafultSamples();
-        //    }
-        //    else
-        //    {
-        //        instance.LoadFromFileSamples(path);
-        //    }
-        //    this.Keys.AddRange(instance.LoadLayout());
-        //}
-        ///// <summary>
-        ///// save layout in file
-        ///// </summary>
-        ///// <param name="path">target file</param>
-        //public void SaveConfiguration(string path)
-        //{
-        //   KeyInterpretator.KeyInterpretator.GetInstance().SaveToFileSamples(path);
-        //}
-
-
     }
 }

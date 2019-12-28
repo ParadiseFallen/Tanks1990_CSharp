@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Tanks1990.Game.Map
 {
     [Serializable]
-    class Map
+    class World
     {
         //public List<GameEntities.GameEntity> Entities { get; set; }
 
