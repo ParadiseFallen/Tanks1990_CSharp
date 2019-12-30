@@ -9,16 +9,22 @@ using Tanks1990.Input.KeyInterpretator;
 
 namespace Tanks1990.Input.BindableIODevice.Controller
 {
+
+    interface IBindebleInputDevice 
+    {
+        event Action<KeyMetadata> KeyAdded;
+    }
+
     /// <summary>
     ///Bindeble keyboard 
     /// </summary>
-    class BindableInputDevice
+    class BindableInputDevice : IBindebleInputDevice
     {
         #region Data
         /// <summary>
         /// List of bindible keys
         /// </summary>
-        private List<BindibleKey> Keys { get; set; }
+        private List<IBindebleKey<KeyEventArgs>> Keys { get; set; }
         /// <summary>
         /// length of history
         /// </summary>
@@ -31,7 +37,7 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         /// UNSAFE! get list of Keys
         /// </summary>
         /// <returns>List<BindibleKey></returns>
-        public List<BindibleKey> UnsafeGetKeys() { return Keys; }
+        public List<IBindebleKey<KeyEventArgs>> UnsafeGetKeys() { return Keys; }
 
         #endregion
         #region Events
@@ -39,15 +45,15 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         /// Action called when key added, you can Connect KeyInterpretator.RegisterSample(), 
         /// Action will called only when you send metadata
         /// </summary>
-        public event Action<LightKeyDataContainer> KeyAdded;
+        public event Action<KeyMetadata> KeyAdded;
         #endregion
         #region Work with keys
         /// <summary>
         /// Add new key to list, if you send metadata KeyAdded will be invoked
         /// </summary>
         /// <param name="key">Bindible key</param>
-        /// <param name="metadata">Info of key in LightKeyDataContainer</param>
-        public void AddKey(BindibleKey key, LightKeyDataContainer metadata = null)
+        /// <param name="metadata">Info of key in KeyMetadata</param>
+        public void AddKey(IBindebleKey<KeyEventArgs> key, KeyMetadata metadata = null)
         {
             if (Keys.Find(i => i.Description == key.Description) != null) throw new Exception("Key already exist!");
             Keys.Add(key);
@@ -94,7 +100,7 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         /// </summary>
         /// <param name="KeyDescription">Key description</param>
         /// <returns></returns>
-        public BindibleKey GetKey(string KeyDescription)
+        public IBindebleKey<KeyEventArgs> GetKey(string KeyDescription)
         {
             return Keys.Find(i => i.Description == KeyDescription);
         }
@@ -107,6 +113,24 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         {
             return Keys.RemoveAll(i => i.Description == KeyDescription);
         }
+        /// <summary>
+        /// Lock all keys with descr
+        /// </summary>
+        /// <param name="description">list of descr keys</param>
+        public void LockByDescr(List<string> description) {
+            Keys.ForEach(
+                i => {
+                    if (description.Contains(i.Description)) i.Locked = true;
+                }
+                );
+        }
+        public void UnlockByDescr(List<string> description) {
+            Keys.ForEach(
+                    i => {
+                        if (description.Contains(i.Description)) i.Locked = false;
+                    }
+                    );
+        }
         #endregion
 
         /// <summary>
@@ -114,12 +138,12 @@ namespace Tanks1990.Input.BindableIODevice.Controller
         /// </summary>
         /// <param name="Keys">Layout|List<BindibleKey> keys|DEFAULT = null</param>
         /// <param name="HistorySize">How many data to remember|int HistorySize|DEFAULT = 0</param>
-        public BindableInputDevice(List<BindibleKey> Keys = null, int HistorySize = 0)
+        public BindableInputDevice(List<IBindebleKey<KeyEventArgs>> Keys = null, int HistorySize = 0)
         {
             this.Keys = Keys;
             this.HistorySize = HistorySize;
             //check null
-            if (Keys is null) this.Keys = new List<BindibleKey>();
+            if (Keys is null) this.Keys = new List<IBindebleKey<KeyEventArgs>>();
         }
 
         /// <summary>

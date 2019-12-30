@@ -11,7 +11,7 @@ using Tanks1990.Input.KeyInterpretator;
 
 namespace Tanks1990.Application
 {
-    class App
+    class AppForWindows
     {
         #region Data
         RenderWindow renderWindow;
@@ -20,9 +20,9 @@ namespace Tanks1990.Application
         #endregion
 
         #region Main
-        public App()
+        public AppForWindows()
         {
-            renderWindow = new RenderWindow(VideoMode.DesktopMode, "App");
+            renderWindow = new RenderWindow(VideoMode.DesktopMode, "AppForWindows");
             BaseWindowLinks();
             keyboard = new BindableInputDevice();
             //create window. create app res
@@ -42,8 +42,6 @@ namespace Tanks1990.Application
         {
             //registration func
             KeyInterpretator.GetInstance().RegisterAction("RenderWindow.Close()", renderWindow.Close);
-
-
             //linking
             renderWindow.Closed += (sender, e) => { (sender as RenderWindow)?.Close(); };
             renderWindow.Resized += (object sender, SizeEventArgs arg) => { (sender as RenderWindow).SetView(new View(new Vector2f(arg.Width / 2f, arg.Height / 2f), new Vector2f(arg.Width, arg.Height))); };

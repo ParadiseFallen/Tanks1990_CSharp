@@ -7,23 +7,36 @@ using System.Threading.Tasks;
 
 namespace Tanks1990.Input.BindableIODevice.Key
 {
-    /// <summary>
-    /// Bindible key
-    /// </summary>
-    class BindibleKey
-    {
+    interface IBindebleKey<T> {
         /// <summary>
         /// Description of key
         /// </summary>
-        public string Description{ get; set; }
+        string Description{ get; set; }
         /// <summary>
         /// What key to do when trigered
         /// </summary>
-        public event Action Trigered;
+        event Action Trigered;
         /// <summary>
         /// Function of activation key
         /// </summary>
-        public Func<object, Queue<KeyEventArgs>, KeyEventArgs,bool> Triger { get; internal set; }
+        Func<object, Queue<T>, T, bool> Triger { get; set; }
+        void Update(object sender, T arg, Queue<T> history);
+        bool Locked { get; set; }
+
+    }
+
+    /// <summary>
+    /// Bindible key
+    /// </summary>
+    class BindibleKey : IBindebleKey<KeyEventArgs>
+    {
+        #region Data
+        public string Description { get ; set ; }
+        public bool Locked { get; set; }
+        public Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool> Triger { get ; set ; }
+        public event Action Trigered;
+        #endregion
+
         /// <summary>
         /// Ctor
         /// </summary>
@@ -36,6 +49,7 @@ namespace Tanks1990.Input.BindableIODevice.Key
             this.Trigered += Fucntion;
             this.Description = Description;
         }
+
         /// <summary>
         /// Try to trigger
         /// </summary>
@@ -43,6 +57,7 @@ namespace Tanks1990.Input.BindableIODevice.Key
         /// <param name="arg">Key</param>
         /// <param name="history">History of pressed keys</param>
         public void Update(object sender ,KeyEventArgs arg ,Queue<KeyEventArgs> history ) {
+            if (Locked) return;
            if (Triger.Invoke(sender, history,arg)) Trigered.Invoke();
         }
         /// <summary>

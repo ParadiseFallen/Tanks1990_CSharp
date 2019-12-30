@@ -10,7 +10,7 @@ using Tanks1990.Interfaces;
 
 namespace Tanks1990.Application.Data.Providers
 {
-    class SampleKeyFileProvider : IProvider<List<LightKeyDataContainer>>
+    class SampleKeyFileProvider : IProvider<List<KeyMetadata>>
     {
         public Predicate<string> Filter { get; set; } = (string a) => { return true; };
         /// <summary>
@@ -20,16 +20,16 @@ namespace Tanks1990.Application.Data.Providers
         /// <summary>
         /// Get list of key samples from file.ly
         /// </summary>
-        /// <returns>List<LightKeyDataContainer></returns>
-        public List<LightKeyDataContainer> Get()
+        /// <returns>List<KeyMetadata></returns>
+        public List<KeyMetadata> Get()
         {
-            List<LightKeyDataContainer> Samples = new List<LightKeyDataContainer>();
+            List<KeyMetadata> Samples = new List<KeyMetadata>();
             FileStream fs = new FileStream($"{ Link }", FileMode.OpenOrCreate);
             try
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 //deserialize
-                Samples = binaryFormatter.Deserialize(fs) as List<LightKeyDataContainer>;
+                Samples = binaryFormatter.Deserialize(fs) as List<KeyMetadata>;
                 fs.Close();
             }
             catch (Exception)
@@ -46,7 +46,7 @@ namespace Tanks1990.Application.Data.Providers
         /// Save to file.ly
         /// </summary>
         /// <param name="data">List of key samples</param>
-        public void Place(List<LightKeyDataContainer> data)
+        public void Place(List<KeyMetadata> data)
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fs = new FileStream($"{Link}", FileMode.OpenOrCreate);

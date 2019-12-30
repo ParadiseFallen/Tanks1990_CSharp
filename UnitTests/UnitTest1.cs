@@ -4,10 +4,16 @@ using Xunit.Sdk;
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class MainTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CreatingWindow()
+        {
+            
+        }
+
+        [TestMethod]
+        public void TestMethod2()
         {
         }
     }

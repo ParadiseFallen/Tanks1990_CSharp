@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -27,6 +28,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -51,21 +54,20 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="SFML.Audio, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFML.Audio.2.5.0\lib\netstandard2.0\SFML.Audio.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.Audio.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFML.Graphics.2.5.0\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="SFML.System, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFML.System.2.5.0\lib\netstandard2.0\SFML.System.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.System.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Window, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFML.Window.2.5.0\lib\netstandard2.0\SFML.Window.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.Window.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,26 +78,45 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="tgui.net, Version=0.8.3.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\tgui.net.dll</HintPath>
+    </Reference>
+    <Reference Include="Vector2D, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vector-2D.1.1.0.88\lib\Vector2D.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\App.cs" />
-    <Compile Include="Application\Data\Graphic\GraphicManager.cs" />
+    <Compile Include="Application\Data\GraphicMng\GraphicManager.cs" />
     <Compile Include="Application\Data\Providers\SampleKeyFileProvider.cs" />
     <Compile Include="Application\Game\Game.cs" />
     <Compile Include="Application\Game\Logic\GameEntities\GameEntity.cs" />
+    <Compile Include="Application\Game\States\IGameState.cs" />
     <Compile Include="Application\Game\Logic\Map\Chunk.cs" />
     <Compile Include="Application\Game\Logic\Map\Tile.cs" />
     <Compile Include="Application\Game\Logic\Map\World.cs" />
     <Compile Include="Application\Data\Providers\FileGraphicProvider.cs" />
-    <Compile Include="Application\Templates\Wraps\DescriptionWrap.cs" />
+    <Compile Include="Application\Game\States\MainMenuState.cs" />
+    <Compile Include="outdated\Physic\IColisionController2D.cs" />
+    <Compile Include="outdated\Physic\IPhysicModel.cs" />
+    <Compile Include="outdated\Physic\RealisticPhysic2D\IPhysic2D\IColision2D.cs" />
+    <Compile Include="outdated\Physic\RealisticPhysic2D\PhisycMock.cs" />
+    <Compile Include="outdated\Physic\Simple2DPhisyc\IColision.cs" />
+    <Compile Include="outdated\Physic\Simple2DPhisyc\Moveble.cs" />
+    <Compile Include="Application\Interfaces\IUpdateble.cs" />
+    <Compile Include="outdated\Physic\RealisticPhysic2D\PhysicCaster2D.cs" />
+    <Compile Include="outdated\Physic\RealisticPhysic2D\PhysicEntity2D.cs" />
+    <Compile Include="outdated\Physic\PhysicCore.cs" />
+    <Compile Include="Application\Interfaces\ILog.cs" />
+    <Compile Include="outdated\Templates\Wraps\DescriptionWrap.cs" />
     <Compile Include="Application\Interfaces\IProvider.cs" />
-    <Compile Include="Application\Input\KeyInterpretator.cs" />
-    <Compile Include="Application\Input\Keys\LightKeyDataContainer.cs" />
+    <Compile Include="Application\InputBinds\KeyInterpretator.cs" />
+    <Compile Include="Application\InputBinds\Keys\KeyMetadata.cs" />
     <Compile Include="Application\Tests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Application\Input\BindableInputDevice.cs" />
-    <Compile Include="Application\Input\Keys\BindibleKeys.cs" />
+    <Compile Include="Application\InputBinds\BindableInputDevice.cs" />
+    <Compile Include="Application\InputBinds\Keys\BindibleKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -118,7 +139,16 @@
   <ItemGroup>
     <Content Include="Application\Resources\LowPolyBackground.png" />
     <Content Include="Application\Resources\LowPolyBackground2.png" />
+    <Content Include="Application\Resources\Vector.png" />
     <Content Include="Application\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets" Condition="Exists('..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
+  </Target>
 </Project>

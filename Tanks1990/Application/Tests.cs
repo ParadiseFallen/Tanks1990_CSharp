@@ -17,6 +17,10 @@ using Tanks1990.Input.BindableIODevice.Key;
 using Tanks1990.Input.KeyInterpretator;
 using Tanks1990.Providers;
 using static Tanks1990.Input.KeyInterpretator.KeyInterpretator;
+using BasicVector;
+using Vector2d = BasicVector.Vector;
+using Tanks1990.Application.Game.Physic;
+using Tanks1990.Application.Game.Physic.Physic2D;
 
 #if DEBUG
 namespace Tanks1990.Application.DEBUG
@@ -24,9 +28,11 @@ namespace Tanks1990.Application.DEBUG
     class Tests
     {
 
-        public void Run() {
+        public void Run()
+        {
 
-            GraphicManager graphicManager = new GraphicManager(new FileGraphicProvider() { Link = "C:/Users/Paradise/Desktop/Tanks1990_CSharp/Tanks1990/Application/Resources", Filter = ((string name)=>{return name.Contains(".png")|| name.Contains(".jpg"); }) });
+
+            GraphicManager graphicManager = new GraphicManager(new FileGraphicProvider() { Link = "C:/Users/Paradise/Desktop/Tanks1990_CSharp/Tanks1990/Application/Resources", Filter = ((string name) => { return name.Contains(".png") || name.Contains(".jpg"); }) });
             KeyInterpretator.GetInstance().Provider = new SampleKeyFileProvider() { Link = "test.ly" };
 
 
@@ -41,26 +47,61 @@ namespace Tanks1990.Application.DEBUG
             window.Closed += (sender, e) => { (sender as RenderWindow)?.Close(); };
             window.Resized += (object sender, SizeEventArgs arg) => { (sender as RenderWindow).SetView(new View(new Vector2f(arg.Width / 2f, arg.Height / 2f), new Vector2f(arg.Width, arg.Height))); };
 
+            Console.WriteLine(window.GetViewport(window.GetView()));
+
+
             //connect keyboard
             window.KeyPressed += keyboard.Update;
 
-            Sprite sprite = new Sprite(graphicManager.Textures["LowPolyBackground.png"]);
 
-            keyboard.AddKey(new BindibleKey("F5", (sender, history, key) => { return key.Code == Keyboard.Key.F5; }, ()=> { sprite.Texture = sprite.Texture == graphicManager.Textures["LowPolyBackground.png"] ? graphicManager.Textures["LowPolyBackground2.png"] : graphicManager.Textures["LowPolyBackground.png"]; }));
+            //keyboard.AddKey(new BindibleKey("F5", (sender, history, key) => { return key.Code == Keyboard.Key.F5; }, () => { sprite.Texture = sprite.Texture == graphicManager.Textures["LowPolyBackground.png"] ? graphicManager.Textures["LowPolyBackground2.png"] : graphicManager.Textures["LowPolyBackground.png"]; }));
 
 
-            //load conf
-            //keyboard.LoadConfiguration();
 
             //load only afetr all registration
             KeyInterpretator.GetInstance().LoadSamples(LoadMode.PROVIDER);
             KeyInterpretator.GetInstance().LoadLayout(keyboard);
+
+
+
+
+
+            //mock.MyGravity = new PhysicCaster2D();
+            //mock.MyGravity.Power = 1;
+            //mock.MyGravity.Range = new Vector2d(1, 1);
+
+            TGUI.Gui gui = new TGUI.Gui(window);
+            var box = new TGUI.TextBox() { Position = new Vector2f(100, 100) };
+            box.Focused += (object sender, EventArgs arg) => { Console.WriteLine($"Focused! \t{sender}\n{arg}"); };
+            gui.Add(box, "TextBox");
+            TGUI.Grid grid = new TGUI.Grid();
+
+
+            //добавить всем блокировку и разблокировку клавиатуры
+            gui.GetWidgets().ForEach(i =>
+            {
+                i.Focused += (object sender, EventArgs args) =>
+                {
+                    keyboard.LockByDescr(new List<string>() { "Escape" });
+
+                };
+                i.Unfocused += (object sender2, EventArgs args2) =>
+                {
+                    keyboard.UnlockByDescr(new List<string>() { "Escape" });
+                };
+            });
+
+            Clock clock = new Clock();
             do
             {
                 window.DispatchEvents();
                 window.Clear();
 
-                window.Draw(sprite);
+
+
+
+                gui.Draw();
+
 
 
                 window.Display();

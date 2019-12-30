@@ -1,4 +1,5 @@
-﻿#define TEST
+﻿//#define TEST
+#define WINDOWS
 namespace Tanks1990
 {
     class Program
@@ -10,8 +11,15 @@ namespace Tanks1990
             Application.DEBUG.Tests tests = new Application.DEBUG.Tests();
             tests.Run();
 #else
-            Application.App app = new Application.App();
+
+
+#if WINDOWS
+            Application.AppForWindows app = new Application.AppForWindows();
             app.Run();
+#endif
+
+
+
 #endif
 
         }

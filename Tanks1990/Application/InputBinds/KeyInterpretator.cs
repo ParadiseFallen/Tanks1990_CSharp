@@ -15,9 +15,9 @@ namespace Tanks1990.Input.KeyInterpretator
     class KeyInterpretator
     {
         /// <summary>
-        /// Провайдер который предоставляет данные <List<LightKeyDataContainer>>
+        /// Провайдер который предоставляет данные <List<KeyMetadata>>
         /// </summary>
-        public IProvider<List<LightKeyDataContainer>> Provider { get; set; }
+        public IProvider<List<KeyMetadata>> Provider { get; set; }
         /// <summary>
         /// Режимы добавления сэмплов и загрузки,
         /// Как добавить кнопки в клавиатуру Замена/Добавление, загрузка примеров из файла Замена/Добавление
@@ -36,7 +36,7 @@ namespace Tanks1990.Input.KeyInterpretator
         /// </summary>
         /// <param name="provider">Провайдер с которым будет работать, по умолчанию null</param>
         /// <returns>Точка доступа KeyInterpretator</returns>
-        static public KeyInterpretator GetInstance(IProvider<List<LightKeyDataContainer>> provider = null)
+        static public KeyInterpretator GetInstance(IProvider<List<KeyMetadata>> provider = null)
         {
             if (Instance == null) Instance = new KeyInterpretator(provider);
             return Instance;
@@ -54,21 +54,21 @@ namespace Tanks1990.Input.KeyInterpretator
         /// <summary>
         /// Список примеров клавиш 
         /// </summary>
-        private List<LightKeyDataContainer> Samples;
+        private List<KeyMetadata> Samples;
         #endregion
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="provider">Провайдер, с которым будет работать интерпретатор</param>
-        public KeyInterpretator(IProvider<List<LightKeyDataContainer>> provider)
+        public KeyInterpretator(IProvider<List<KeyMetadata>> provider)
         {
             //set provider
             Provider = provider;
             //init all fields
             KeyActivationFunctionsDictionary = new Dictionary<string, Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool>>();
             KeyActionsDictionary = new Dictionary<string, Action>();
-            Samples = new List<LightKeyDataContainer>();
+            Samples = new List<KeyMetadata>();
             //register default trigers
             RegisterDefaultTrigers();
         }
@@ -107,7 +107,7 @@ namespace Tanks1990.Input.KeyInterpretator
         /// Регистрация примера клавиши
         /// </summary>
         /// <param name="value">Пример клавиши</param>
-        public void RegisterSample(LightKeyDataContainer value)
+        public void RegisterSample(KeyMetadata value)
         {
             if (Samples.Find(i => i.Description == value.Description) != null) throw new Exception($"Key {value.Description} already registered");
             if (!CheckForExist(KeyActionsDictionary.Keys.ToList(), value.ActionF)) throw new Exception($"Some actions dont registered");
@@ -149,7 +149,7 @@ namespace Tanks1990.Input.KeyInterpretator
         /// </summary>
         /// <param name="Description">Описание примера клавиши</param>
         /// <returns>Пример клавиши</returns>
-        public LightKeyDataContainer GetSample(string Description)
+        public KeyMetadata GetSample(string Description)
         {
             return Samples.Find(i => i.Description == Description);
         }
@@ -196,9 +196,9 @@ namespace Tanks1990.Input.KeyInterpretator
         /// Для сборки клавиш из примеров
         /// </summary>
         /// <returns>Список собранных клавиш</returns>
-        private List<BindibleKey> BuildBindibleKeysFromSamples()
+        private List<IBindebleKey<KeyEventArgs>> BuildBindibleKeysFromSamples()
         {
-            List<BindibleKey> keys = new List<BindibleKey>();
+            List<IBindebleKey<KeyEventArgs>> keys = new List<IBindebleKey<KeyEventArgs>>();
             foreach (var item in Samples)
             {
                 var t = new BindibleKey(item.Description, KeyActivationFunctionsDictionary[item.Triger], null);
@@ -215,7 +215,7 @@ namespace Tanks1990.Input.KeyInterpretator
         /// </summary>
         private void RegisterDefaultSamples()
         {
-            RegisterSample(new LightKeyDataContainer(new List<string>() { "RenderWindow.Close()" }) { Description = "Escape", Triger = "Pressed_Escape" });
+            RegisterSample(new KeyMetadata(new List<string>() { "RenderWindow.Close()" }) { Description = "Escape", Triger = "Pressed_Escape" });
         }
         /// <summary>
         /// Добавить тригеры по умолчанию

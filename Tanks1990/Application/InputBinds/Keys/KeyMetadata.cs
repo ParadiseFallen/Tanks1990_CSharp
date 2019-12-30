@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Tanks1990.Input.BindableIODevice.Key.Serialization
 {
     [Serializable]
-    class LightKeyDataContainer
+    class KeyMetadata
     {
-        public LightKeyDataContainer(List<string> ActionF = null)
+        public KeyMetadata(List<string> ActionF = null)
         {
             this.ActionF = ActionF;
             if (ActionF == null) ActionF = new List<string>();
