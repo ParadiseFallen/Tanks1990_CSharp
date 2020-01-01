@@ -10,6 +10,6 @@ namespace Tanks1990.Application.Game.States
 {
     interface IGameState : IUpdatebleTime,Drawable
     {
-        Enum State { get; set; }
+        bool DontUnloadFromMemory { get; set; }
     }
 }

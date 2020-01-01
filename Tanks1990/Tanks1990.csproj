@@ -58,28 +58,37 @@
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Audio, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.Audio.dll</HintPath>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.11\lib\netstandard2.0\SFML.Audio.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.11\lib\netstandard2.0\SFML.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="SFML.System, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.System.dll</HintPath>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.11\lib\netstandard2.0\SFML.System.dll</HintPath>
     </Reference>
     <Reference Include="SFML.Window, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\SFML.Window.dll</HintPath>
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.11\lib\netstandard2.0\SFML.Window.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="tgui.net, Version=0.8.3.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.10\lib\netstandard2.0\tgui.net.dll</HintPath>
+    <Reference Include="tgui.net, Version=0.8.3.11, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TGUI.Net.win-x64.0.8.3.11\lib\netstandard2.0\tgui.net.dll</HintPath>
     </Reference>
     <Reference Include="Vector2D, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Vector-2D.1.1.0.88\lib\Vector2D.dll</HintPath>
@@ -91,12 +100,13 @@
     <Compile Include="Application\Data\Providers\SampleKeyFileProvider.cs" />
     <Compile Include="Application\Game\Game.cs" />
     <Compile Include="Application\Game\Logic\GameEntities\GameEntity.cs" />
-    <Compile Include="Application\Game\States\IGameState.cs" />
+    <Compile Include="Application\Game\States\StateBuilder.cs" />
+    <Compile Include="Application\Interfaces\IGameState.cs" />
     <Compile Include="Application\Game\Logic\Map\Chunk.cs" />
     <Compile Include="Application\Game\Logic\Map\Tile.cs" />
     <Compile Include="Application\Game\Logic\Map\World.cs" />
     <Compile Include="Application\Data\Providers\FileGraphicProvider.cs" />
-    <Compile Include="Application\Game\States\MainMenuState.cs" />
+    <Compile Include="Application\Game\States\AllStates\MainMenuState.cs" />
     <Compile Include="outdated\Physic\IColisionController2D.cs" />
     <Compile Include="outdated\Physic\IPhysicModel.cs" />
     <Compile Include="outdated\Physic\RealisticPhysic2D\IPhysic2D\IColision2D.cs" />
@@ -143,12 +153,12 @@
     <Content Include="Application\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets" Condition="Exists('..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TGUI.Net.win-x64.0.8.3.10\build\TGUI.Net.win-x64.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\TGUI.Net.win-x64.0.8.3.11\build\TGUI.Net.win-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TGUI.Net.win-x64.0.8.3.11\build\TGUI.Net.win-x64.targets'))" />
   </Target>
+  <Import Project="..\packages\TGUI.Net.win-x64.0.8.3.11\build\TGUI.Net.win-x64.targets" Condition="Exists('..\packages\TGUI.Net.win-x64.0.8.3.11\build\TGUI.Net.win-x64.targets')" />
 </Project>

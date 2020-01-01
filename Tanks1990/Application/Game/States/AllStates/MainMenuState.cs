@@ -11,15 +11,36 @@ namespace Tanks1990.Application.Game.States
     class MainMenuState : IGameState
     {
         private TGUI.Gui gui;
-        public Enum State { get; set; }
+
+        public bool DontUnloadFromMemory { get; set; }
+
+        public MainMenuState()
+        {
+            DontUnloadFromMemory = true;
+
+            gui = new TGUI.Gui();
+
+
+            var window = new TGUI.ChildWindow();
+            var window2 = new TGUI.ChildWindow();
+            window.Add(window2);
+
+            gui.Add(window, "test");
+        }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
+            gui.Target = target as RenderWindow;
+
+
+
             gui.Draw();
         }
 
+
         public void Update(Time time)
         {
+
 
         }
     }

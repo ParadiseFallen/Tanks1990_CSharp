@@ -24,16 +24,26 @@ namespace Tanks1990.Application
         {
             renderWindow = new RenderWindow(VideoMode.DesktopMode, "AppForWindows");
             BaseWindowLinks();
-            keyboard = new BindableInputDevice();
-            //create window. create app res
+            renderWindow.SetFramerateLimit(144);
 
+            keyboard = new BindableInputDevice();
+
+            renderWindow.KeyPressed += keyboard.Update;
+
+            KeyInterpretator.GetInstance().LoadLayout(keyboard);
+            //create window. create app res
+        }
+
+        private void ExeptionColector(Exception ex) {
+            Console.WriteLine(ex);
         }
 
         public void Run() {
             //Не обязательно конкретно эта игра. Game доставлено окно
-            using (Game.Game game = new Game.Game(renderWindow, keyboard)) {
+            using (Game.Game game = new Game.Game(renderWindow, keyboard, ExeptionColector)) {
                 game.Run();
             }
+            renderWindow.Dispose();
         }
         #endregion
 

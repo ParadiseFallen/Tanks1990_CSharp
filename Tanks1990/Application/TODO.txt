@@ -1,4 +1,4 @@
-Планы разработки:
+о в Планы разработки:
 Написание тестов 
 
 разбиение на логику и графику 
@@ -8,3 +8,30 @@
 Создание карты
 
 Надо что бы при взаимодействии с GUI блокировалась клавиатура (События, или переназначались)
+
+
+BUG:
+Помощник по отладке управляемого кода "CallbackOnCollectedDelegate" : "Был произведен обратный вызов делегата типа "tgui.net!TGUI.Widget+CallbackAction::Invoke", полученного сборщиком мусора. Это может привести к сбоям приложения, а также к повреждению или утрате данных. При передаче делегатов в неуправляемый код управляемое приложение должно поддерживать их существование, пока не будет гарантировано, что они больше никогда не будут вызваны."
+
+
+BUG:
+System.AccessViolationException Возникновение: окно в окне TGUI, если закрыть дочерний элемент а следом само окно то вылет
+FIX:
+var window = new TGUI.ChildWindow();
+            window.Closed += (object sender, EventArgs arg) => { window.DisconnectAll(); window.GetWidgets().ForEach(i=> { i.DisconnectAll(); i.Dispose(); }); window.Dispose(); };
+            var window2 = new TGUI.ChildWindow();
+            window2.Closed += (object sender, EventArgs arg) => { (sender as TGUI.ChildWindow).Dispose(); };
+            window.Add(window2);
+				BUG: Закрываеться не сразу
+				FIX:
+				var window = new TGUI.ChildWindow();
+				window.Closed += (object sender, EventArgs arg) => { (sender as TGUI.ChildWindow).Visible = false; };
+				var window2 = new TGUI.ChildWindow();
+				window2.Closed += (object sender, EventArgs arg) => { (sender as TGUI.ChildWindow).Visible = false; };
+				window.Add(window2);
+				просто скрывать
+
+BUG :
+System.AccessViolationException
+StackTrace	"   at TGUI.Gui.tguiGui_handleEvent(IntPtr cPointer, Event ev)\r\n   at TGUI.Gui.OnMouseMoved(Object sender, MouseMoveEventArgs e)\r\n   at System.EventHandler`1.Invoke(Object sender, TEventArgs e)\r\n   at SFML.Window.Window.CallEventHandler(Event e)\r\n   at SFML.Window.Window.DispatchEvents()\r\n   at Tanks1990.Application.Game.Game.Run() in C:\\Users\\Paradise\\Desktop\\Tanks1990_CSharp\\Tanks1990\\Application\\Game\\Game.cs:line 79\r\n   at Tanks1990.Application.AppForWindows.Run() in C:\\Users\\Paradise\\Desktop\\Tanks1990_CSharp\\Tanks1990\\Application\\App.cs:line 44\r\n   at Tanks1990.Program.Main(String[] args) in C:\\Users\\Paradise\\Desktop\\Tanks1990_CSharp\\Tanks1990\\Program.cs:line 18"	string
+
