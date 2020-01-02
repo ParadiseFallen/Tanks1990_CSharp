@@ -1,13 +1,9 @@
-﻿using SFML.Graphics;
+﻿using Input.BindableIODevice.Controller;
+using Input.KeyInterpretator;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tanks1990.Input.BindableIODevice.Controller;
-using Tanks1990.Input.KeyInterpretator;
 
 namespace Tanks1990.Application
 {
@@ -20,11 +16,14 @@ namespace Tanks1990.Application
         #endregion
 
         #region Main
+            /// <summary>
+            /// Приложение, предоставляет клавиатуру, окно, собтирает ошибки
+            /// </summary>
         public AppForWindows()
         {
-            renderWindow = new RenderWindow(VideoMode.DesktopMode, "AppForWindows");
+            renderWindow = new RenderWindow(new VideoMode(1920,1080), "AppForWindows");
             BaseWindowLinks();
-            renderWindow.SetFramerateLimit(144);
+            renderWindow.SetFramerateLimit(60);
 
             keyboard = new BindableInputDevice();
 

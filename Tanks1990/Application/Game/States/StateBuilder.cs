@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tanks1990.Application.Interfaces;
 
 namespace Tanks1990.Application.Game.States
 {
-    class StateBuilder
+    static class StateBuilder
     {
         public enum StateID { MainMenu };
 
         static private Dictionary<StateID, IGameState> HotStates = new Dictionary<StateID, IGameState>();
 
+        /// <summary>
+        /// Jist return state by ID
+        /// </summary>
+        /// <param name="ID">State id</param>
+        /// <returns>IGameState</returns>
         static public IGameState GetState(StateID ID) {
             IGameState stateToReturn = null;
 

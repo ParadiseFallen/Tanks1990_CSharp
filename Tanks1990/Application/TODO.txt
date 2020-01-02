@@ -34,4 +34,8 @@ var window = new TGUI.ChildWindow();
 BUG :
 System.AccessViolationException
 StackTrace	"   at TGUI.Gui.tguiGui_handleEvent(IntPtr cPointer, Event ev)\r\n   at TGUI.Gui.OnMouseMoved(Object sender, MouseMoveEventArgs e)\r\n   at System.EventHandler`1.Invoke(Object sender, TEventArgs e)\r\n   at SFML.Window.Window.CallEventHandler(Event e)\r\n   at SFML.Window.Window.DispatchEvents()\r\n   at Tanks1990.Application.Game.Game.Run() in C:\\Users\\Paradise\\Desktop\\Tanks1990_CSharp\\Tanks1990\\Application\\Game\\Game.cs:line 79\r\n   at Tanks1990.Application.AppForWindows.Run() in C:\\Users\\Paradise\\Desktop\\Tanks1990_CSharp\\Tanks1990\\Application\\App.cs:line 44\r\n   at Tanks1990.Program.Main(String[] args) in C:\\Users\\Paradise\\Desktop\\Tanks1990_CSharp\\Tanks1990\\Program.cs:line 18"	string
+FIX: update tgui
+
+
+Разбить на интерфейсы Input
 

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Input.Key.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-using Tanks1990.Input.BindableIODevice.Key.Serialization;
 using Tanks1990.Interfaces;
 
 namespace Tanks1990.Application.Data.Providers

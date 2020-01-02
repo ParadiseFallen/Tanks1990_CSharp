@@ -3,10 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tanks1990.Interfaces;
-using Tanks1990.Templates.Wraps;
 
 namespace Tanks1990.Providers
 {
@@ -34,7 +31,6 @@ namespace Tanks1990.Providers
             //load all filenames
             //List<string> fileNames =  Directory.GetFiles(Link).ToList();
             DirectoryInfo DI = new DirectoryInfo(Link);
-            DI.GetFiles().ToList().ForEach(Console.WriteLine);
             //fileNames.ForEach(Console.WriteLine);
             //для каждого внути директории
             DI.GetFiles().ToList().ForEach(name=> {

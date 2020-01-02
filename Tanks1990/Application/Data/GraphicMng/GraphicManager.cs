@@ -8,21 +8,45 @@ using Tanks1990.Interfaces;
 
 namespace Tanks1990.Application.Data.Graphic
 {
+    /// <summary>
+    /// Single container of graphic data
+    /// </summary>
     class GraphicManager
     {
+        #region Instancing
+        /// <summary>
+        /// Instance
+        /// </summary>
+        private static GraphicManager _instance;
+        public static GraphicManager Instance { get {
+                if (_instance is null)
+                {
+                    _instance = new GraphicManager();
+                }
+                return _instance;
+            } }
+        #endregion
 
         /// <summary>
         /// работает с конкретным провайдером, который дает словарь имя-текстура
         /// </summary>
-        public IProvider<Dictionary<string, Texture>> myProvider;
+
+        #region Ctors
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="provider">Провайдер, с которым он будет работать, НЕ может быть NULL</param>
-        public GraphicManager(IProvider<Dictionary<string, Texture>> provider)
-        {
-            myProvider = provider;
-            Textures = provider.Get();
+        private GraphicManager(){
+            Textures = new Dictionary<string, Texture>();
+            Drawbales = new Dictionary<string, Drawable>();
+        }
+        #endregion
+
+        /// <summary>
+        /// Load textures.(provider)
+        /// </summary>
+        public void Load() { 
+            Textures = Provider.Get();
         }
         /// <summary>
         /// Просит провайдера сохранить картинку с именем
@@ -32,12 +56,23 @@ namespace Tanks1990.Application.Data.Graphic
         public void SaveImg(Image img,string name) {
             Dictionary<string, Texture> t = new Dictionary<string, Texture>();
             t.Add(name, new Texture(img));
-            myProvider.Place(t);
+            Provider.Place(t);
         }
+
+        #region DATA
         /// <summary>
         /// Словарь текстур
         /// </summary>
         public Dictionary<string, Texture> Textures {get;private set;}
+        /// <summary>
+        /// All sprites, animations,tilesets,etc
+        /// </summary>
+        public Dictionary<string, Drawable> Drawbales { get; set; }
+        /// <summary>
+        /// Texture provider
+        /// </summary>
+        public IProvider<Dictionary<string, Texture>> Provider { get; set; }
 
+        #endregion
     }
 }

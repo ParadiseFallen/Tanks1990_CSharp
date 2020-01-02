@@ -1,20 +1,20 @@
 ﻿using SFML.System;
 
-namespace Tanks1990.Application.Game.Physic
+namespace Tanks1990.Application.Interfaces
 {
-    internal interface IUpdatebleTime<T>
+    public interface IUpdatebleTime<T>
     {
-        void Update(Time time,T arg);
+        void Update(Time time, T arg);
     }
-    internal interface IUpdatebleTime
+    public interface IUpdatebleTime
     {
         void Update(Time time);
     }
-    internal interface IUpdateble<T>
+    public interface IUpdateble<T>
     {
         void Update(T arg);
     }
-    internal interface IUpdateble
+    public interface IUpdateble
     {
         void Update();
     }

@@ -1,26 +1,15 @@
 ﻿#define DEBUG
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SFML;
+using Input.BindableIODevice.Controller;
+using Input.KeyInterpretator;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using Tanks1990.Application;
 using Tanks1990.Application.Data.Graphic;
 using Tanks1990.Application.Data.Providers;
-using Tanks1990.Input.BindableIODevice.Controller;
-using Tanks1990.Input.BindableIODevice.Key;
-using Tanks1990.Input.KeyInterpretator;
 using Tanks1990.Providers;
-using static Tanks1990.Input.KeyInterpretator.KeyInterpretator;
-using BasicVector;
-using Vector2d = BasicVector.Vector;
-using Tanks1990.Application.Game.Physic;
-using Tanks1990.Application.Game.Physic.Physic2D;
+using static Input.KeyInterpretator.KeyInterpretator;
 
 #if DEBUG
 namespace Tanks1990.Application.DEBUG
@@ -32,7 +21,6 @@ namespace Tanks1990.Application.DEBUG
         {
 
 
-            GraphicManager graphicManager = new GraphicManager(new FileGraphicProvider() { Link = "C:/Users/Paradise/Desktop/Tanks1990_CSharp/Tanks1990/Application/Resources", Filter = ((string name) => { return name.Contains(".png") || name.Contains(".jpg"); }) });
             KeyInterpretator.GetInstance().Provider = new SampleKeyFileProvider() { Link = "test.ly" };
 
 

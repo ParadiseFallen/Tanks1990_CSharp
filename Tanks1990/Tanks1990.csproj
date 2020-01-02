@@ -96,37 +96,48 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\App.cs" />
+    <Compile Include="Application\Data\GraphicMng\Animation.cs" />
     <Compile Include="Application\Data\GraphicMng\GraphicManager.cs" />
+    <Compile Include="Application\Data\GraphicMng\GrpahicController\GraphicController.cs" />
+    <Compile Include="Application\Data\GraphicMng\TileSet.cs" />
     <Compile Include="Application\Data\Providers\SampleKeyFileProvider.cs" />
     <Compile Include="Application\Game\Game.cs" />
-    <Compile Include="Application\Game\Logic\GameEntities\GameEntity.cs" />
+    <Compile Include="Application\Game\GameEntities\Fabric\Builders\TankBuilder.cs" />
+    <Compile Include="Application\Game\GameEntities\GameEntity.cs" />
+    <Compile Include="Application\Game\GameEntities\Fabric\GameEntityBuilderFabric.cs" />
+    <Compile Include="Application\Game\GameEntities\Graphic\ObjectRendererSprite.cs" />
+    <Compile Include="Application\Game\GameEntities\Phisyc\ObjectPhisycModel2d.cs" />
     <Compile Include="Application\Game\States\StateBuilder.cs" />
-    <Compile Include="Application\Interfaces\IGameState.cs" />
-    <Compile Include="Application\Game\Logic\Map\Chunk.cs" />
-    <Compile Include="Application\Game\Logic\Map\Tile.cs" />
-    <Compile Include="Application\Game\Logic\Map\World.cs" />
+    <Compile Include="Application\Input_DONE\Interfaces\IBindebleInputDevice.cs" />
+    <Compile Include="Application\Input_DONE\Interfaces\IBindibleKey.cs" />
+    <Compile Include="Application\Interfaces\Entities\IEntityBuilder.cs" />
+    <Compile Include="Application\Interfaces\Game\IGameState.cs" />
+    <Compile Include="Application\Game\Map\Chunk.cs" />
+    <Compile Include="Application\Game\Map\Tile.cs" />
+    <Compile Include="Application\Game\Map\World.cs" />
     <Compile Include="Application\Data\Providers\FileGraphicProvider.cs" />
     <Compile Include="Application\Game\States\AllStates\MainMenuState.cs" />
-    <Compile Include="outdated\Physic\IColisionController2D.cs" />
-    <Compile Include="outdated\Physic\IPhysicModel.cs" />
-    <Compile Include="outdated\Physic\RealisticPhysic2D\IPhysic2D\IColision2D.cs" />
-    <Compile Include="outdated\Physic\RealisticPhysic2D\PhisycMock.cs" />
-    <Compile Include="outdated\Physic\Simple2DPhisyc\IColision.cs" />
-    <Compile Include="outdated\Physic\Simple2DPhisyc\Moveble.cs" />
+    <Compile Include="Application\Interfaces\Entities\Graphic\IRendererEntity.cs" />
+    <Compile Include="Application\Extensions\Vector2dExtension.cs" />
+    <Compile Include="Trash\Physic\IColisionController2D.cs" />
+    <Compile Include="Application\Interfaces\Entities\Phisyc\IPhysicModel.cs" />
+    <Compile Include="Trash\Physic\RealisticPhysic2D\IPhysic2D\IColision2D.cs" />
+    <Compile Include="Trash\Physic\RealisticPhysic2D\PhisycMock.cs" />
+    <Compile Include="Application\Interfaces\Entities\Phisyc\IColision2D.cs" />
+    <Compile Include="Application\Interfaces\Entities\Phisyc\IMoveble.cs" />
     <Compile Include="Application\Interfaces\IUpdateble.cs" />
-    <Compile Include="outdated\Physic\RealisticPhysic2D\PhysicCaster2D.cs" />
-    <Compile Include="outdated\Physic\RealisticPhysic2D\PhysicEntity2D.cs" />
-    <Compile Include="outdated\Physic\PhysicCore.cs" />
+    <Compile Include="Trash\Physic\RealisticPhysic2D\PhysicCaster2D.cs" />
+    <Compile Include="Trash\Physic\RealisticPhysic2D\PhysicEntity2D.cs" />
+    <Compile Include="Trash\Physic\PhysicCore.cs" />
     <Compile Include="Application\Interfaces\ILog.cs" />
-    <Compile Include="outdated\Templates\Wraps\DescriptionWrap.cs" />
     <Compile Include="Application\Interfaces\IProvider.cs" />
-    <Compile Include="Application\InputBinds\KeyInterpretator.cs" />
-    <Compile Include="Application\InputBinds\Keys\KeyMetadata.cs" />
+    <Compile Include="Application\Input_DONE\KeyInterpretator.cs" />
+    <Compile Include="Application\Input_DONE\Keys\KeyMetadata.cs" />
     <Compile Include="Application\Tests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Application\InputBinds\BindableInputDevice.cs" />
-    <Compile Include="Application\InputBinds\Keys\BindibleKeys.cs" />
+    <Compile Include="Application\Input_DONE\BindableInputDevice.cs" />
+    <Compile Include="Application\Input_DONE\Keys\BindibleKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -145,11 +156,13 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Application\Resources\LowPolyBackground.png" />
-    <Content Include="Application\Resources\LowPolyBackground2.png" />
-    <Content Include="Application\Resources\Vector.png" />
+    <Folder Include="Application\.res\.fonts\" />
+    <Folder Include="Application\.res\.sounds\" />
+    <Folder Include="Application\.res\.textures\" />
+    <Folder Include="Trash\Physic\Simple2DPhisyc\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Application\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

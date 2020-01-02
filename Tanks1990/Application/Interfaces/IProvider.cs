@@ -12,7 +12,7 @@ namespace Tanks1990.Interfaces
     /// Universal interface for all providers
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    interface IProvider<T>
+    public interface IProvider<T>
     {
         /// <summary>
         /// Filter of data
