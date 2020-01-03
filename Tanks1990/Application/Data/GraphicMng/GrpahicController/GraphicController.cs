@@ -11,6 +11,7 @@ namespace Tanks1990.Application.Data.GraphicMng.GrpahicController
 
     class Layer : Drawable
     {
+        public string LayerDescription { get; set; } = "";
         public Layer()
         {
             Drawables = new List<Drawable>();

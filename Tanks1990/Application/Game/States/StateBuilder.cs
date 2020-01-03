@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using Tanks1990.Application.Interfaces;
 
@@ -18,7 +19,7 @@ namespace Tanks1990.Application.Game.States
         static public IGameState GetState(StateID ID) {
             IGameState stateToReturn = null;
 
-            if (HotStates.TryGetValue(ID,out stateToReturn)) return stateToReturn;
+            if (HotStates.TryGetValue(ID, out stateToReturn)) { stateToReturn.Load(); return stateToReturn; } 
 
             switch (ID)
             {
@@ -31,7 +32,6 @@ namespace Tanks1990.Application.Game.States
 
             if (stateToReturn.DontUnloadFromMemory)
                     HotStates.Add(ID, stateToReturn);
-
             return stateToReturn;
         }
 

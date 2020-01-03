@@ -112,17 +112,17 @@ namespace Input.BindableIODevice.Controller
         /// Lock all keys with descr
         /// </summary>
         /// <param name="description">list of descr keys</param>
-        public void LockByDescr(List<string> description) {
+        public void LockKeys(Predicate<String> Filter) {
             Keys.ForEach(
                 i => {
-                    if (description.Contains(i.Description)) i.Locked = true;
+                    if (Filter(i.Description)) i.Locked = true;
                 }
                 );
         }
-        public void UnlockByDescr(List<string> description) {
+        public void UnlockKeys(Predicate<String> Filter) {
             Keys.ForEach(
                     i => {
-                        if (description.Contains(i.Description)) i.Locked = false;
+                        if (Filter(i.Description)) i.Locked = false;
                     }
                     );
         }
@@ -147,8 +147,6 @@ namespace Input.BindableIODevice.Controller
         /// <param name="e">KeyData</param>
         private void UpdateHistory(KeyEventArgs e)
         {
-
-
             History.Enqueue(e);
             if (History.Count > HistorySize) History.Dequeue();
         }

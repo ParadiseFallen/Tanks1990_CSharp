@@ -21,16 +21,16 @@ namespace Tanks1990.Application.DEBUG
         {
 
 
-            KeyInterpretator.GetInstance().Provider = new SampleKeyFileProvider() { Link = "test.ly" };
+            KeyInterpretator.Instance.Provider = new SampleKeyFileProvider() { Link = "test.ly" };
 
 
             //keyboard
             BindableInputDevice keyboard = new BindableInputDevice();
-            keyboard.KeyAdded += KeyInterpretator.GetInstance().RegisterSample;
+            keyboard.KeyAdded += KeyInterpretator.Instance.RegisterSample;
 
 
             RenderWindow window = new RenderWindow(VideoMode.DesktopMode, "test");
-            KeyInterpretator.GetInstance().RegisterAction("RenderWindow.Close()", window.Close);
+            KeyInterpretator.Instance.RegisterAction("RenderWindow.Close()", window.Close);
 
             window.Closed += (sender, e) => { (sender as RenderWindow)?.Close(); };
             window.Resized += (object sender, SizeEventArgs arg) => { (sender as RenderWindow).SetView(new View(new Vector2f(arg.Width / 2f, arg.Height / 2f), new Vector2f(arg.Width, arg.Height))); };
@@ -47,8 +47,8 @@ namespace Tanks1990.Application.DEBUG
 
 
             //load only afetr all registration
-            KeyInterpretator.GetInstance().LoadSamples(LoadMode.PROVIDER);
-            KeyInterpretator.GetInstance().LoadLayout(keyboard);
+            KeyInterpretator.Instance.LoadSamples(LoadMode.PROVIDER);
+            KeyInterpretator.Instance.LoadLayout(keyboard);
 
 
 
@@ -70,12 +70,16 @@ namespace Tanks1990.Application.DEBUG
             {
                 i.Focused += (object sender, EventArgs args) =>
                 {
-                    keyboard.LockByDescr(new List<string>() { "Escape" });
+                    keyboard.LockKeys((string name)=> {
+                        return true;
+                    });
 
                 };
                 i.Unfocused += (object sender2, EventArgs args2) =>
                 {
-                    keyboard.UnlockByDescr(new List<string>() { "Escape" });
+                    keyboard.UnlockKeys((string name) => {
+                        return true;
+                    });
                 };
             });
 
@@ -98,7 +102,7 @@ namespace Tanks1990.Application.DEBUG
             } while (window.IsOpen);
 
             //keyboard.SaveConfiguration("D:/Layout.lyt");
-            KeyInterpretator.GetInstance().SaveSamples(LoadMode.PROVIDER);
+            KeyInterpretator.Instance.SaveSamples(LoadMode.PROVIDER);
 
 #if STOP_AT_END
             Console.WriteLine("Program done");

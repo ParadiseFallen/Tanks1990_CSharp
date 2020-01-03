@@ -26,16 +26,31 @@ namespace Input.KeyInterpretator
         /// <summary>
         /// Общая точка доступа, что бы можно было регистрировать функции из любой части программы
         /// </summary>
-        static private KeyInterpretator Instance;
+        static private KeyInterpretator instance;
         /// <summary>
         ///  Получить точку доступа
         /// </summary>
         /// <param name="provider">Провайдер с которым будет работать, по умолчанию null</param>
         /// <returns>Точка доступа KeyInterpretator</returns>
-        static public KeyInterpretator GetInstance(IProvider<List<KeyMetadata>> provider = null)
+        /// 
+        static public KeyInterpretator Instance
         {
-            if (Instance == null) Instance = new KeyInterpretator(provider);
-            return Instance;
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new KeyInterpretator();
+                }
+                return instance;
+            } 
+        }
+        private KeyInterpretator()
+        {
+            //init all fields
+            KeyActivationFunctionsDictionary = new Dictionary<string, Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool>>();
+            KeyActionsDictionary = new Dictionary<string, Action>();
+            Samples = new List<KeyMetadata>();
+            RegisterDefaultTrigers();
         }
         #endregion
         #region Data
@@ -57,17 +72,12 @@ namespace Input.KeyInterpretator
         /// Конструктор
         /// </summary>
         /// <param name="provider">Провайдер, с которым будет работать интерпретатор</param>
-        public KeyInterpretator(IProvider<List<KeyMetadata>> provider)
-        {
-            //set provider
-            Provider = provider;
-            //init all fields
-            KeyActivationFunctionsDictionary = new Dictionary<string, Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool>>();
-            KeyActionsDictionary = new Dictionary<string, Action>();
-            Samples = new List<KeyMetadata>();
-            //register default trigers
-            RegisterDefaultTrigers();
-        }
+        //public KeyInterpretator(IProvider<List<KeyMetadata>> provider)
+        //{
+        //    //set provider
+        //    Provider = provider;
+        //    //register default trigers
+        //}
 
         #region Registering
         /*

@@ -60,12 +60,12 @@ namespace Input.Interfaces
         /// Lock keys(dont handle events)
         /// </summary>
         /// <param name="description">List of descriptions</param>
-        void LockByDescr(List<string> description);
+        void LockKeys(Predicate<String> Filter);
         /// <summary>
         /// Unlock by description (Handle events again)
         /// </summary>
         /// <param name="description">List of description</param>
-        void UnlockByDescr(List<string> description);
+        void UnlockKeys(Predicate<String> Filter);
 
     }
 }

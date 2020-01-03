@@ -1,5 +1,8 @@
 ﻿//#define TEST
 #define WINDOWS
+using SFML.Graphics;
+using TGUI;
+
 namespace Tanks1990
 {
     class Program
@@ -7,20 +10,28 @@ namespace Tanks1990
         static void Main(string[] args)
         {
 
-#if TEST
-            Application.DEBUG.Tests tests = new Application.DEBUG.Tests();
-            tests.Run();
-#else
+
+            //RenderWindow windowContainer = new RenderWindow(SFML.Window.VideoMode.DesktopMode, "Test");
+
+            //TGUI.Gui gui = new TGUI.Gui();
 
 
-#if WINDOWS
-            Application.AppForWindows app = new Application.AppForWindows();
-            app.Run();
-#endif
+            //var vl = new VerticalLayout();
 
+            //vl.SetPosition(new Layout2d("&.width-width + width/20", "&.height+40% - height"));
+            //vl.SetSize(new Layout2d("&.width-width", " &.h"));
 
+            //gui.Add(vl);
 
-#endif
+            //gui.Target = (windowContainer as RenderTarget) as RenderWindow;
+
+            ////as RenderTarget
+            //return;
+
+            using (Application.App app = new Application.App())
+            {
+                app.Run();
+            }
 
         }
 

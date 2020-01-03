@@ -25,6 +25,7 @@ namespace Input.Key
         /// <param name="Description">Description/param>
         public BindibleKey(string Description,Func<object, Queue<KeyEventArgs>, KeyEventArgs, bool> ActivationFunction = null, Action Fucntion = null)
         {
+            this.Locked = false;
             this.Triger = ActivationFunction;
             this.Trigered += Fucntion;
             this.Description = Description;

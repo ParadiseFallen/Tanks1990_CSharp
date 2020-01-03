@@ -95,13 +95,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\App.cs" />
+    <Compile Include="Trash\App%28Delete%29.cs" />
     <Compile Include="Application\Data\GraphicMng\Animation.cs" />
     <Compile Include="Application\Data\GraphicMng\GraphicManager.cs" />
     <Compile Include="Application\Data\GraphicMng\GrpahicController\GraphicController.cs" />
     <Compile Include="Application\Data\GraphicMng\TileSet.cs" />
     <Compile Include="Application\Data\Providers\SampleKeyFileProvider.cs" />
-    <Compile Include="Application\Game\Game.cs" />
+    <Compile Include="Application\App.cs" />
     <Compile Include="Application\Game\GameEntities\Fabric\Builders\TankBuilder.cs" />
     <Compile Include="Application\Game\GameEntities\GameEntity.cs" />
     <Compile Include="Application\Game\GameEntities\Fabric\GameEntityBuilderFabric.cs" />
@@ -119,6 +119,7 @@
     <Compile Include="Application\Game\States\AllStates\MainMenuState.cs" />
     <Compile Include="Application\Interfaces\Entities\Graphic\IRendererEntity.cs" />
     <Compile Include="Application\Extensions\Vector2dExtension.cs" />
+    <Compile Include="Application\Wraps\RenderWindowWrap.cs" />
     <Compile Include="Trash\Physic\IColisionController2D.cs" />
     <Compile Include="Application\Interfaces\Entities\Phisyc\IPhysicModel.cs" />
     <Compile Include="Trash\Physic\RealisticPhysic2D\IPhysic2D\IColision2D.cs" />
